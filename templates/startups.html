@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="main">
+  <div id="content" class="full_width">
+    <div id="title">
+      <h2>Startups</h2>
+      <a class="add" href="/startup/nuevo">Agregar una nueva startup</a>
+    </div>
+    <ul id="startups">
+    {% for startup in startups %}
+      <li class="startup">
+        <div class="startup_logo" style="background: transparent url({% if startup.last_info.logo %}/startup_logo/{{startup.last_info.key}}?size=small{% endif %}) no-repeat scroll 50% 50%"></div>
+        <h4><a href="/startup/{{startup.slug}}">{{startup.last_info.name}}</a></h4>
+        <p>{{startup.last_info.description}}</p>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

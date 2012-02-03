@@ -1,0 +1,105 @@
+input, textarea, select, option, button {
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Verdana, Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  padding: 2px; }
+
+fieldset {
+  padding: 0.5em 1em; }
+
+.field {
+  overflow: hidden;
+  padding: 0.5em 0;
+  padding-left: 0.2em; }
+
+label {
+  display: block;
+  margin-top: 0.5em;
+  margin-right: 2em;
+  margin-bottom: 0.2em; }
+
+input.text, input[type="text"], input.file, textarea {
+  line-height: 1.3em; }
+
+ul {
+  overflow: hidden; }
+  ul li {
+    margin: 0.3em 0;
+    overflow: hidden;
+    line-height: 1em;
+    margin-bottom: 1em; }
+  ul input {
+    margin-right: 0.5em;
+    float: left; }
+
+input.submit, button.submit {
+  border: 1px solid #666666;
+  background-color: #dddddd;
+  -webkit-border-radius: 1.3em;
+  -moz-border-radius: 1.3em;
+  -khtml-border-radius: 1.3em;
+  border-radius: 1.3em;
+  text-shadow: 0 1px 1px white;
+  height: 2.6em;
+  padding-left: 1.82em;
+  padding-right: 1.82em;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  /*background-image:  url("/static/images/bg_button_roundness.png");*/
+  background-repeat: repeat-x;
+  background-position: 50% 0;
+  margin: 1em 0; }
+  input.submit:hover, button.submit:hover {
+    background-color: #cccccc; }
+
+p.note {
+  color: #999999;
+  font-size: 0.85em;
+  margin-bottom: 0; }
+
+.notice {
+  margin: 1em 0;
+  border-top: 1px solid #eee46a;
+  border-bottom: 1px solid #eee46a;
+  padding: 1em;
+  background: #fefede; }
+
+.valid input {
+  background-color: #def0bc; }
+
+.invalid {
+  background-color: #f6cfcf; }
+  .invalid p.message {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+    font-size: 0.85em;
+    color: #c00000; }
+    
+.grayedOut{
+  color: #999;
+}
+
+p.note.invalid {
+  color: #c00000;
+  background-color: transparent; }
+
+ul.taggable input {
+  outline: 0; }
+
+#dialog_box{
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.5);
+  padding: 2em;
+  position: relative;
+}
+
+#dialog_box #close{
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}

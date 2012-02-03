@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script type="text/javascript" src="/static/js/dialog.js"></script>
+<script type="text/javascript">
+var unsubscribed_founder = {% if is_founder and not subscribed%}true{%else%}false{%endif%};
+
+$(function(){
+  $('#add_founder a').click(function(e){
+    $(this).before('<form method="post" action="/startup/add/founder/{{startup.slug}}"><span>Twitter: @</span><input type="text" name="twitter"/><input type="submit" value="Agregar"/></form>');
+    e.preventDefault();
+    $(this).hide();
+  });
+  
+  if(unsubscribed_founder){
+    
+    $('body').append('<button id="button">Button</button>');
+    $('body').append('<div id="subscribe_notice"></div>');
+   
+    {% if logged_in_user.email %}
+      $('#subscribe_notice').html(
+          '<h3>Eres fundador de {{startup.last_info.name}}</h3>'
+        + '<p>¿Quieres recibir una notificación cada vez que alguien le haga un cambio?</p>'
+        + '<form method="POST" action="/subscribe">'
+        +   '<input type="hidden" name="startup_key" value="{{startup.key}}"/>'
+        +   '<input type="submit" class="close_dialog" value="Suscribirme"/>'
+        + '</form>'
+      );
+    {% else %} 
+      $('#subscribe_notice').html(
+          '<h3>Eres fundador de {{startup.last_info.name}}</h3>'
+        + '<p>¿Quieres recibir una notificación cada vez que alguien le haga un cambio?</p>'
+        + '<form method="POST" action="/add-email-and-subscribe">'
+        +   '<input type="hidden" name="startup_key" value="{{startup.key}}"/>'
+        +   '<input type="text" name="email" class="email" value=""/>'
+        +   '<input type="submit" class="close_dialog" value="Suscribirme"/>'
+        + '</form>'
+      );
+    {% endif %}
+ 
+    $('#button').dialog({
+      bg_color: "#000",
+      contents: "#subscribe_notice",
+      auto_trigger: true,
+      hide_button: true,
+      onShow: function(){
+        var field = $('#subscribe_notice .email');
+        var placeholder = "Correo electrónico";
+        field.focus(function(){
+          if(field.val() == placeholder){
+            field.val("").removeClass("grayedOut");
+          }
+        })
+        .blur(function(){
+          if(field.val() == ""){
+            field.val(placeholder).addClass("grayedOut");
+          }
+        })
+        .trigger('blur');        
+      }, 
+    });
+  }
+  
+})
+</script>
+<div id="main">
+  <div id="content">
+    <div id='icon'>
+      <img src='/static/images/icon_rocket_50.png' />
+    </div>
+    <div id="basics">    
+      <div id="title">
+        <h2>{{startup.last_info.name}}</h2>
+        <a class="edit" href="/startup/edit/{{startup.slug}}" title="Editar">Editar</a>
+        <a class="history" href="/startup/historial/{{startup.slug}}" title="Ver Historial">Historial</a>
+      </div>
+      <p><strong>En 140 caracteres: </strong>
+        {%if startup.last_info.description %}
+          <span>{{startup.last_info.description}} </span>
+        {% else %} <em>No disponible</em><span> | </span><a href="/startup/edit/{{startup.slug}}">Agregar</a> {% endif %}
+      </p>
+      <p><strong>Sitio web: </strong>
+        {%if startup.last_info.homepage %}
+          <a href="{{startup.last_info.homepage}}">{{startup.last_info.homepage}}</a>
+        {% else %} <em>No disponible</em><span> | </span><a href="/startup/edit/{{startup.slug}}">Agregar</a> {% endif %}
+      </p>
+      <p><strong>Fecha de fundación: </strong>
+        {%if startup.last_info.founded_at %}
+          <span>{{startup.last_info.founded_at|date:"M/Y"}}</span>
+        {% else %}
+          <em>No disponible</em><span> | </span><a href="/startup/edit/{{startup.slug}}">Agregar</a>
+        {% endif %}
+      </p>
+
+      {%if startup.last_info.ended_at %}
+        <p><strong>Fecha de cierre: </strong>
+          <span>{{startup.last_info.ended_at|date:"M/Y"}}</span>
+        </p>
+      {% endif %}
+
+      <p><strong>Blog: </strong>
+        {%if startup.last_info.blog %}
+          <a href="{{startup.last_info.blog}}">{{startup.last_info.blog}}</a>
+        {% else %} <em>No disponible</em><span> | </span><a href="/startup/edit/{{startup.slug}}">Agregar</a> {% endif %}
+      </p>
+      <p><strong>Correo electrónico: </strong>
+        {%if startup.last_info.email %}
+          <span>{{startup.last_info.email}} </span>
+        {% else %} <em>No disponible</em><span> | </span><a href="/startup/edit/{{startup.slug}}">Agregar</a> {% endif %}
+      </p>
+      <div id="startup_logo" style="background: transparent url({% if startup.last_info.logo %} /startup_logo/{{startup.last_info.key}} {% endif %}) no-repeat scroll 50% 50%"></div>
+    </div>
+    <div id="founders">  
+      <h3>Fundadores</h3>
+      <ul>
+      {% for founder_startup in startup.founders %}
+        <li><a href="/founder/{{founder_startup.founder.twitter}}">{% if founder_startup.founder.name %} {{founder_startup.founder.name}} {% else %} {{founder_startup.founder.twitter}} {% endif %}</a></li>
+      {% endfor %}
+        <li id="add_founder"><a href="#">Agregar Fundador</a></li>
+      </ul>
+    </div>
+    <div id="extras">
+      <h3>Detalles</h3>
+        <div>
+          {%if startup.last_info.overview %}
+            <span>{{startup.last_info.overview|linebreaks}} </span>
+          {% else %} <em>No disponible</em><span> | </span><a href="/startup/edit/{{startup.slug}}">Agregar</a> {% endif %}
+        </div>
+      </div>
+    </div>
+    <div id='sidebar'>
+      <div id='social'>
+        <h3>Comparte este perfil</h3>
+        <ul>
+          <li>
+            <iframe src="http://www.facebook.com/plugins/like.php?app_id=217567741611335&amp;href&amp;send=false&amp;layout=button_count&amp;width=200&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
+          </li>
+          <li>
+            <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+            <div>
+               <a href="http://twitter.com/share" class="twitter-share-button">Tweet</a>
+            </div>
+          </li>
+          <li>
+            <g:plusone size="medium"></g:plusone>
+          </li>
+        </ul>
+        {% if logged_in_user %}
+          <hr/> 
+          {% if logged_in_user.email %}
+            {% if not subscribed %}
+              <form method="POST" action="/subscribe">
+                <input type="hidden" name="startup_key" value="{{startup.key}}"/>
+                <input type="submit" value="Suscribirse a cambios"/>
+              </form>
+            {% else %}
+              <form method="POST" action="/unsubscribe">
+                <input type="hidden" name="startup_key" value="{{startup.key}}"/>
+                <input type="submit" value="Remover suscripción"/>
+              </form>
+            {% endif %}
+          {% else %}
+            <form method="POST" action="/add-email-and-subscribe">
+              <input type="hidden" name="startup_key" value="{{startup.key}}"/>
+              <input name="email" value="escribe tu correo">
+              <input type="submit" value="Suscribirse a cambios"/>
+            </form>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+    
+{% endblock %}

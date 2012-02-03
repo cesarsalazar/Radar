@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div id="main">
+  <div id="content" class="full_width">
+    <h2>Historial: {{startup.last_info.name}}</h2>
+    <form method="POST">
+      <ul>
+      {% for startup_info in startup_infos %}
+        <li>
+          {% ifequal startup.last_info.key startup_info.key %}
+            <strong>[version actual]</strong>
+          {% else %}
+            <input type="radio" name="version" value="{{startup_info.key}}">
+          {% endifequal %}
+          <a href="/startup/{{startup.slug}}/{{startup_info.key}}">{{startup_info.created|date:"d/m/Y h:m"}}</a> by <a href="http://twitter.com/{{startup_info.author.nickname}}">@{{startup_info.author.nickname}}</a>
+        </li>
+      {% endfor %}
+      </ul>
+      <input class="submit" type="submit" value="Cambiar de version"/>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

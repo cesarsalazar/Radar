@@ -1,0 +1,373 @@
+body {
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+  background: #e6e6e6  url("/static/images/granite.jpg") repeat scroll 0 0;
+  font-size: 13pt; }
+
+h1, h2, h3, h4 {
+  font-family: Helvetica, Arial, Verdana, sans-serif;
+  margin: 1em auto 0.5em; }
+
+h1 {
+  color: #85bd24;
+  font-size: 4em;
+  letter-spacing: -0.04em; }
+
+h2 {
+  margin-top: 0.25em;
+  font-size: 2.5em;
+  color: #999999;
+  letter-spacing: -0.04em; }
+
+ul {
+  list-style: none;
+  overflow: visible; }
+  ul li {
+    overflow: visible; }
+
+a {
+  color: #85bd24;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+
+a.edit{
+  width: 25px;
+  height: 25px;
+  display: block;
+  text-indent: -6000px;
+  background: transparent url('/static/images/icon_edit_bw.png') no-repeat scroll 0 0;
+}
+a.edit:hover{
+    background: transparent url('/static/images/icon_edit_color.png') no-repeat scroll 0 0;
+}
+
+a.history{
+  width: 25px;
+  height: 25px;
+  display: block;
+  text-indent: -6000px;
+  background: transparent url('/static/images/icon_history_25_bw.png') no-repeat scroll 0 0;
+}
+a.history:hover{
+    background: transparent url('/static/images/icon_history_25.png') no-repeat scroll 0 0;
+}
+
+a.add{
+  padding-left: 45px;
+  line-height: 25px;
+  background: transparent url('/static/images/icon_add_22.png') no-repeat scroll 0 50%;
+}
+
+#main {
+  margin-left: auto;
+  margin-right: auto;
+  width: 896px;
+  position: relative;
+  margin-bottom: 1em; }
+
+#content {
+  -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  background: white;
+  padding: 30px;
+  width: 600px;
+  overflow: visible;
+  z-index: 10;}
+  
+  #content.full_width{
+    width: 836px;
+  }
+  
+  #content h3 {
+    display: block;
+    background: #85bd24;
+    padding: 0.5em;
+    color: white;
+    padding-left: 2em;
+    width: 30%;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    margin-left: -2em;
+    position: relative; }
+   
+.stripe {
+  position: absolute;
+  content: "";
+  display: block;
+  border-width: 1em 0 0 1em;
+  border-style: solid;
+  border-color: #496714 transparent transparent transparent;
+  bottom: -1em;
+  left: -9px;}
+  
+  #content p {
+    line-height: 1.5;
+  }
+  #content #title{
+    overflow: hidden;
+  }
+  #content #title h2{
+    display: inline-block;
+    float: left;
+  }
+  #content #title .edit, #content #title .history{
+    float: left;
+    margin-left: 1em;
+    margin-top: 1em;
+  }
+  #content #title .add{
+    float: right;
+    margin-left: 1em;
+    margin-top: 2em;
+  }
+  #content #basics{
+    clear: both;
+  }
+  #profile_image, #startup_logo{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 73px;
+    height: 73px;
+    -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+    -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border: 3px solid #FFF;
+    -webkit-transform:rotate(-5deg);
+    -moz-transform:rotate(-5deg);
+    -ms-transform:rotate(-5deg);
+    -o-transform:rotate(-5deg);}
+  
+  #startup_logo{
+    background: transparent url('/static/images/startup_placeholder_73.png') no-repeat scroll 0 0;}
+
+  #profile_image{
+    background: transparent url('/static/images/founder_placeholder_73.png') no-repeat scroll 0 0;}
+    
+    
+#icon {
+  width: 100px;
+  position: absolute;
+  left: -96px;
+  top: 24px;
+  /*z-index: -1*/;
+  padding: 1em; }
+
+#sidebar {
+  width: 200px;
+  background: #f2f2f2;
+  position: absolute;
+  right: 0;
+  top: 17px;
+  border: 1px solid #cccccc;
+  -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  padding: 1em; }
+  #sidebar h3 {
+    font-size: 1em;
+    margin-bottom: 1em; }
+
+#header {
+  margin-top: 2em;
+  overflow: hidden;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1em;
+  width: 896px;}
+  
+  #header #menu{
+    position: absolute;
+    overflow: hidden;
+    left: 200px;
+    bottom: 0;
+  }
+  #header #menu li{
+    display:-moz-inline-stack;
+    display:inline-block;
+    zoom:1;
+    *display:inline;
+    float: left;
+    padding: 0 20px;
+    margin: 0;
+    line-height: 1;
+  }
+    #header #menu li a{
+      color: #222222;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+      #header #menu li a:hover{
+        color: #85bd24;
+        text-decoration: none;
+      }
+  #header #login {
+    position: absolute;
+    right: 0;
+    bottom: 0; }
+    #header #login a#login_w_twitter {
+      background: transparent  url("/static/images/sign_in_w_twitter.png") no-repeat scroll 0 0;
+      width: 151px;
+      height: 24px;
+      display: block;
+      text-indent: -6000px; }
+
+#main, #content {
+  position: relative; }
+
+#flag {
+  width: 30px;
+  margin-right: 1em; }
+
+h2 {
+  margin-top: 0.2em;
+  text-shadow: 0 1px 1px white;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.7); }
+
+/**** Show views *****/
+
+
+#startups ul li {
+  min-height: 30px;
+  line-height: 1.5;
+  background: transparent url("/static/images/icon_rocket_25.png") no-repeat scroll 0 0;
+  padding-left: 3em; }
+
+#founders ul li{
+  min-height: 30px;
+  line-height: 1.5;
+  background: transparent url("/static/images/icon_astronaut_25.png") no-repeat scroll 0 0;
+  padding-left: 2.5em; }
+
+/**** List views *****/
+
+#founders li{
+  line-height: 1.5;
+  background: transparent url("/static/images/icon_astronaut_25.png") no-repeat scroll 0 0;
+  padding-left: 2.5em; }
+
+#startups li{
+  line-height: 1.5;
+  background: transparent url("/static/images/icon_rocket_25.png") no-repeat scroll 0 0;
+  padding-left: 2.5em; }
+
+#footer{
+  width: 896px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
+  overflow: hidden;}
+  
+  #footer ul li{
+    display:-moz-inline-stack;
+    display:inline-block;
+    zoom:1;
+    *display:inline;
+    float: left;
+    padding: 0 10px;
+    color: #999999;
+    font-size: 0.85em;}
+    
+    #footer ul li a{
+      color: #999999;
+      text-decoration: none;}
+      
+      #footer ul li a:hover{
+        text-decoration: underline;}
+        
+/**** Forms ****/
+
+form > div{
+  margin-bottom: 1em;
+}
+
+input[type="text"], textarea{
+  padding: 0.3em;
+  width: 20em;
+}
+
+em{
+  color: #999999;
+  font-size: 0.85em;
+  font-family: Georgia, serif;
+}
+
+#add_founder input[type="text"]{
+  margin: 0;
+  padding: 0;
+  float: none;
+  width: 10em;
+}
+#add_founder input[type="submit"]{
+  float: none;
+}
+
+/**** Homepage ****/
+
+#homepage h1{
+  margin-top: 0.5em;
+  color: #999999;
+  font-size: 4em;
+  line-height: 1.2;
+}
+#homepage a:hover{
+  text-decoration: none;
+  background: rgba(255,255,255,0.4);
+}
+
+
+/**** Lists ****/
+
+li.startup{
+  clear:both;
+  padding: 0.2em;
+  overflow: auto;
+  margin-bottom: 0;
+}
+li.startup h4{
+  margin-top: 0;
+  margin-bottom: 0.1em;
+}
+li.startup p{
+  font-size: 0.8em;
+  line-height: 1.3;
+}
+.startup_logo{
+  display: block;
+  width: 48px;
+  height: 48px;
+  float: left;
+  margin-right: 30px;
+  border: 1px solid #FFF;
+  -moz-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.25);
+  background: transparent url('/static/images/startup_placeholder_73.png') no-repeat scroll 0 0;
+}
+
+
+
+
+/***** Notices ****/
+
+#subscribe_notice{
+  text-align: center;
+}
+
+#subscribe_notice p{
+  margin-bottom: 1em;
+}

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id='main'>
+  <div id='content'>
+    <div id='icon'>
+      <img src='/static/images/icon_astronaut_50.png' />
+    </div>
+    <div id='basics'>
+      <div id="title">
+        <h2>{% if founder.name %} {{founder.name}} {% else %} {{founder.twitter}} {% endif %}</h2>
+        {% if can_edit %} <a class="edit" href="/founder/edit/{{twitter}}">Editar</a> {% endif %}
+      </div>
+      <p id='twitter'><strong>Twitter: </strong><a href="http://twitter.com/{{founder.twitter}}"><span>@</span><span>{{founder.twitter}}</span></a></p>
+      <p id='location'><strong>Location: </strong>{{founder.city}}</p>
+      <p id='personal_website'><strong>Website: </strong><a href="{{founder.website}}">{{founder.website}}</a></p>
+      <!-- BACKLOG <p data-country='MX' id='nationality'>{{founder.country}}</p> -->
+      <div id="profile_image">
+        {% if founder.profile_image %}
+          <img src="{{founder.profile_image}}"/>
+        {% endif %}
+      </div>
+    </div>
+    <div id='startups'>
+      <h3>Startups</h3>
+      <ul>
+        {% for startup in startups %}
+          <li><p>
+            {% spaceless %}
+            <span>{% if founder.name %}{{founder.name}}{%else%}@{{founder.twitter}}{%endif%}</span>
+            <span>fundó <a href="/startup/{{startup.startup.slug}}">{{startup.startup.last_info.name}}</a></span>
+            {% if startup.startup.founders_filter %}
+              <span>con</span>
+              {% for cofounder in startup.startup.founders_filter %}{% ifnotequal cofounder.founder.twitter founder.twitter %}{% if forloop.first %}{% else %}{% if forloop.last %}<span> y </span>{% else %}<span>, </span>{% endif %}{% endif %}<a href="/founder/{{cofounder.founder.twitter}}">{% if cofounder.founder.name %}<span>{{cofounder.founder.name}}</span>{% else %}<span>{{cofounder.founder.twitter}}</span>{% endif %}</a>{% endifnotequal %}{% endfor %}{% endif %}{% endspaceless %}
+          </p></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div id='networks'>
+      <h3>En redes sociales</h3>
+      <ul>
+        {% if founder.linked_in %}
+          <li>
+            <strong>LinkedIn: </strong><a href="{{founder.linked_in}}">{{founder.linked_in}}</a>
+          </li>
+        {% endif %}
+        </li>
+        {% if founder.github %}
+          <li>
+            <strong>Github: </strong><a href="{{founder.github}}">{{founder.github}}</a>
+          </li>
+        {% endif %}
+        {% if founder.facebook %}
+          <li>
+            <strong>Facebook: </strong><a href="{{founder.facebook}}">{{founder.facebook}}</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  <div id='sidebar'>
+    <div id='social'>
+      <h3>Comparte este perfil</h3>
+      <ul>
+        <li>
+          <iframe src="http://www.facebook.com/plugins/like.php?app_id=217567741611335&amp;href&amp;send=false&amp;layout=button_count&amp;width=200&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:21px;" allowTransparency="true"></iframe>
+        </li>
+        <li>
+          <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+          <div>
+             <a href="http://twitter.com/share" class="twitter-share-button">Tweet</a>
+          </div>
+        </li>
+        <li>
+          <g:plusone size="medium"></g:plusone>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

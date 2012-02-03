@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<script type="text/javascript">
+$(function(){
+  $('input.url').blur(function(){
+    var val = $(this).val();
+    if(val != ""){
+      var preffix = (val.indexOf("http://") == -1) ? "http://" : "";
+      $(this).val(preffix + val);
+    }
+  })
+})
+</script>
+<div id="main">
+  <div id="content" class="full_width">
+    <h2>Editar: {{founder.twitter}}</h2>
+    <form method="POST">
+      <div>
+        <label>Nombre</label>
+        <input type="text" name="name" value="{{founder.name}}"/>
+      </div>
+
+      <div>
+        <label>Ciudad <em>(opcional)</em></label>
+        <input type="text" name="city" value="{{founder.city}}"/>
+      </div>
+
+      <div>
+        <label>Nacionalidad <em>(opcional)</em></label>
+        <input type="text" name="country" value="{{founder.country}}"/>
+      </div>
+
+      <div>
+        <label>Sitio web <em>(opcional)</em></label>
+        <input type="text" class="url" name="website" value="{{founder.website}}"/>
+      </div>
+
+      <div>
+        <label>Perfil en LinkedIn <em>(opcional)</em></label>
+        <input type="text" class="url" name="linked_in" value="{{founder.linked_in}}"/>
+        <p class="note">Ejemplo: http://linkedin.com/in/brunodiaz</p>
+      </div>
+
+      <div>
+        <label>Perfil en Github <em>(opcional)</em></label>
+        <input type="text" name="github" class="url" value="{{founder.github}}"/>
+        <p class="note">Ejemplo: http://github.com/brunodiaz</p> 
+      </div>
+
+      <div>
+        <label>Perfil en Facebook<em>(opcional)</em></label>
+        <input type="text" class="url" name="facebook" value="{{founder.facebook}}"/>
+        <p class="note">Ejemplo: http://www.facebook.com/DFectuoso o http://www.facebook.com/profile.php?id=1133883125</p>
+      </div>
+
+      <div id="action">
+        <input class="submit" type="submit" value="Actualizar Perfil"/>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

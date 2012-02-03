@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script> <!-- Chartbeat -->
+    <title>{% if title %}{{title}} | {% endif %}Radar</title>
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+  	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+  	<script type="text/javascript" src="/static/js/jquery-ui-1.8.13.custom.min.js"></script>
+    <script src='https://apis.google.com/js/plusone.js' type='text/javascript'></script>
+    <script src='/static/js/stripes.js' type='text/javascript'></script>
+  	<link rel="shortcut icon" href="/static/images/favicon.ico" />
+  	<link rel="stylesheet" href="/static/css/smoothness/jquery-ui-1.8.13.custom.css" type="text/css"/>
+  	<link rel="stylesheet" href="/static/css/reset.css" type="text/css"/>
+  	<link rel="stylesheet" href="/static/css/master.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/style.css" type="text/css"/>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-22209981-4']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header">
+        <a href="/">
+          <img src="/static/images/radar_logo_153px.png"/>
+        </a>
+        <ul id="menu">
+          <li><a href="/founders">Fundadores</a></li>
+          <li><a href="/startups">Startups</a></li>
+        </ul>
+        <div id="login">
+          {% if logged_in_user %}
+            <p><span>Bienvenido, </span><span>{{logged_in_user.nickname}}</span><span>! </span><a href="/logout">Salir</a></p>
+          {% else %}
+            <a href='/login' id="login_w_twitter">Sign in with Twitter</a>
+          {% endif %}
+        </div>
+      </div>
+			{% block content %}{% endblock %}
+			<div id="footer">
+			  <ul>
+			    <li>Mexican.VC © 2011</li>
+			    <li><a href="#">Términos de Uso</a></li>
+			    <li><a href="#">Políticas de Privacidad</a></li>
+			  </ul> 
+  		</div>
+		</div>
+	  <script type="text/javascript">
+    var _sf_async_config={uid:634,domain:"radar.mexican.vc"};
+    (function(){
+      function loadChartbeat() {
+        window._sf_endpt=(new Date()).getTime();
+        var e = document.createElement('script');
+        e.setAttribute('language', 'javascript');
+        e.setAttribute('type', 'text/javascript');
+        e.setAttribute('src',
+           (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+           "js/chartbeat.js");
+        document.body.appendChild(e);
+      }
+      var oldonload = window.onload;
+      window.onload = (typeof window.onload != 'function') ?
+         loadChartbeat : function() { oldonload(); loadChartbeat(); };
+    })();
+
+    </script> 
+	</body>
+</html>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="main">
+  <div id="content" class="full_width">
+    <h2>Fundadores</h2>
+    <ul id="founders">
+    {% for founder in founders %}
+      <li>
+        <a href="/founder/{{founder.twitter}}">{% if founder.name %} {{founder.name}} {% else %} {{founder.twitter}} {% endif %}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+TWITTER_CONSUMER = 'S00BroZkebPNmEedSXfQ'
+TWITTER_SECRET   = 'B3J0NxZNzsymDKvJBZAmsrnley6a9od4vSjbbqG3D0I'
+
+MAIN_ACCESS_TOKEN = '254820644-uGyTqGFkjPQSMbNArWp8BUN1uuaBw3ELBXDceY1c'
+MAIN_ACCESS_SECRET = 'yeLtA59p8F9mbQi3kLjIRLx2ed5RsD2hOJR5ZOqk'
+
+# COOKIES
+cookie_key = 'GawrupHecegawa325ec5anupr8wepratuver4cuspeqeberuidsak5cr4sejUWrZZZIPDPSDA'
+
+

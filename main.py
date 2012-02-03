@@ -10,6 +10,7 @@ import logging
 import datetime
 import random
 import sys
+import copy
 sys.path.insert(0, 'libs/tweepy.zip')
 from tweepy import *
 
@@ -294,7 +295,6 @@ class StartupEditHandler(webapp.RequestHandler):
         except ValueError:
           logging.info("Wrong date")
 
-
         if self.request.get("img"):
           startup_info.logo_raw = db.Blob(self.request.get("img"))
           startup_info.logo = db.Blob(images.resize(self.request.get("img"), 73, 73))
@@ -418,7 +418,7 @@ class FounderHandler(webapp.RequestHandler):
     session = get_current_session()
     if session.has_key('user'):
       logged_in_user = session['user']
-      can_edit = logged_in_user.nickname == twitter or logged_in_user.admin
+      can_edit = logged_in_user.nickname == twitter or logged_in_user.admin or True
  
     founder = Founder.all().filter("twitter",twitter).fetch(1)
     if len(founder):    
@@ -439,7 +439,7 @@ class FounderEditHandler(webapp.RequestHandler):
     session = get_current_session()
     if session.has_key('user'):
       logged_in_user = session['user']
-      can_edit = logged_in_user.nickname == twitter or logged_in_user.admin
+      can_edit = logged_in_user.nickname == twitter or logged_in_user.admin or True
       if can_edit:
         founder = Founder.all().filter("twitter",twitter).fetch(1)
         if len(founder):    
@@ -456,10 +456,11 @@ class FounderEditHandler(webapp.RequestHandler):
     session = get_current_session()
     if session.has_key('user'):
       logged_in_user = session['user']
-      can_edit = logged_in_user.nickname == twitter or logged_in_user.admin
+      can_edit = logged_in_user.nickname == twitter or logged_in_user.admin or True
       if can_edit:
         founder = Founder.all().filter("twitter",twitter).fetch(1)
         if len(founder):    
+          old_founder = copy.copy(founder[0])
           founder = founder[0]
           founder.name = sanitize(self.request.get("name"))
           founder.city = sanitize(self.request.get("city"))
@@ -469,6 +470,12 @@ class FounderEditHandler(webapp.RequestHandler):
           founder.github = sanitize(self.request.get("github"))
           founder.facebook = sanitize(self.request.get("facebook"))
           founder.put()
+
+          mail.send_mail(sender="Santiago Zavala <santiago1717@gmail.com>",
+                     to="santiago1717@gmail.com, csr.slzr@gmail.com",
+                     subject="Se ha modificado " + founder.name + " en radar.mexican.vc",
+                     html=template.render('templates/mail/founder_changed_email.html', locals()),
+                     body=template.render('templates/mail/founder_changed_email_plain.html', locals()))
           self.redirect('/founder/' + twitter)
         else:
           self.redirect('/')
